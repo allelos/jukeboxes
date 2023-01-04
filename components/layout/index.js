@@ -1,9 +1,8 @@
 import { useState, useRef } from "react";
 import Controls from "@components/controls";
 import Player from "@components/player";
-import StationSelector from "@components/selector";
 import Visualization from "@components/visualization";
-import styles from "@styles/interface.module.css"
+import styles from "@styles/interface.module.css";
 
 const sources = {
   best: {
@@ -11,10 +10,16 @@ const sources = {
     imgSrc: "/stations/best926.jpg",
     name: "Best 92.6",
   },
+  enLefko: {
+    src: "https://stream.radiojar.com/srzwv225e3quv?_=801191",
+    imgSrc: "/stations/enLefko.png",
+    name: "En Lefko 87.7"
+  },
   imagine: {
     src: "//imagine897.radioca.st/stream",
     imgSrc: "/stations/imagine897.png",
     name: "Imagine 89.7",
+    genre: "Eclectic"
   },
   zucca: {
     src: "https://stream.zuccaradio.com/stream",
@@ -47,15 +52,13 @@ const Layout = () => {
   return (
     <div>
       <div className={styles.container}>
-        <StationSelector onChange={selectSource} />
-        {source && (
-          <Controls
-            play={play}
-            pause={pause}
-            isPlaying={isPlaying}
-            {...sources[source]}
-          />
-        )}
+        <Controls
+          play={play}
+          pause={pause}
+          isPlaying={isPlaying}
+          onSelect={selectSource}
+          {...sources[source]}
+        />
       </div>
       {source && (
         <audio

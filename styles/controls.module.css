@@ -1,51 +1,95 @@
 .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 16px;
-  background: #2b2b2b;
-  border-radius: 4px;
-  border: 1px solid black;
-  color: #e4e4e4;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.information {
+  display: flex;
+  column-gap: 16px;
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(34, 35, 37, 0.7);
+  max-width: 100%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-self: flex-end;
+}
+
+.stationSelector {
+  display: flex;
 }
 
 .header {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   margin-bottom: 16px;
-  column-gap: 8px;
+  row-gap: 8px;
 }
 
 .header h2 {
+  font-size: 20px;
   font-weight: normal;
   margin: 0;
-  font-weight: 300;
-  letter-spacing: -0.5px;
+}
+
+.header h4 {
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
 }
 
 .image {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 100%;
+  border-radius: 20px;
   overflow: hidden;
-  border: solid 2px #484747;
   overflow: hidden;
   object-fit: cover;
 }
 
-.button {
+.playButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: transparent;
   padding: 0;
-  width: 32px;
-  height: 32px;
+  width: clamp(40px, 8vw - 2rem, 4.75rem);
+  height: clamp(40px, 8vw - 2rem, 4.75rem);
   box-sizing: border-box;
-  border: 1px solid hsla(0, 0%, 100%, 0.6);
+  border: 1px solid rgba(255,255,255, 0.5);
   border-radius: 100%;
   transition: none 33ms cubic-bezier(0.3, 0, 0.7, 1);
-  transition-property: all;
+  transition-property: transform;
   outline: 0;
+  cursor: pointer;
 }
 
-.button:hover {
+.playButton:hover {
   transform: scale(1.2);
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    row-gap: 16px;
+    padding: 0;
+  }
+
+  .information {
+    order: 3;
+  }
+
+  .controls {
+    order: 1;
+  }
+
+  .stationSelector {
+    order: 2;
+  }
 }

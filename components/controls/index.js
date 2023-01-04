@@ -1,24 +1,43 @@
 import Image from "next/image";
 import { PlayButton, PauseButton } from "@components/controls/buttons";
+import StationSelector from "@components/selector";
 import styles from "@styles/controls.module.css";
 
-const Controls = ({ play, pause, isPlaying, name, imgSrc }) => (
+const Controls = ({
+  play,
+  pause,
+  isPlaying,
+  name,
+  imgSrc,
+  genre = "Electronic",
+  onSelect,
+}) => (
   <div className={styles.container}>
-    <div className={styles.header}>
-      <h2>{name}</h2>
+    <div className={styles.information}>
       {imgSrc && (
         <Image
           src={imgSrc}
           alt="Radio station logo"
-          width={32}
-          height={32}
+          width={80}
+          height={80}
           className={styles.image}
         />
       )}
+      {name && (
+        <div className={styles.header}>
+          <h2>{name}</h2>
+          <h4>{genre}</h4>
+        </div>
+      )}
     </div>
-    <button className={styles.button} onClick={isPlaying ? pause : play}>
-      {isPlaying ? <PauseButton /> : <PlayButton />}
-    </button>
+    <div className={styles.controls}>
+      <button className={styles.playButton} onClick={isPlaying ? pause : play} disabled={!name}>
+        {isPlaying ? <PauseButton /> : <PlayButton />}
+      </button>
+    </div>
+    <div className={styles.stationSelector}>
+      <StationSelector onSelect={onSelect} />
+    </div>
   </div>
 );
 

@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { Inter } from "@next/font/google";
+import { Rubik } from "@next/font/google";
 import logoStyles from "@styles/logo.module.css"
 
-const inter = Inter({ subsets: ["latin"] });
+const rubik = Rubik({ subsets: ["latin"] });
 
 const Player = dynamic(() => import("@components/layout"), { ssr: false });
 
@@ -25,7 +25,7 @@ const Home = () => {
         priority
         className={logoStyles.container}
       />
-      <main className={inter.className}>
+      <main className={rubik.className}>
         <Player />
       </main>
     </>
