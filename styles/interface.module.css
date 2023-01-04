@@ -1,0 +1,10 @@
+.container {
+  position: fixed;
+  display: block;
+  bottom: 0;
+  left: 0;
+  margin: 8px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
