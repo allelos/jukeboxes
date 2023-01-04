@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://www.jukeboxes.gr">
+    <img alt="Amberele" src="public/jukeboxes.png" />
+  </a>
+</p>
+
 ## Getting Started
 
 First, run the development server:
