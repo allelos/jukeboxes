@@ -26,4 +26,29 @@ const PauseButton = () => {
   );
 };
 
-export { PlayButton, PauseButton };
+const SpeakerButton = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+  >
+    <path
+      d="M12.167 4.1665L8.00033 7.49984H4.66699V12.4998H8.00033L12.167 15.8332V4.1665Z"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M15.9502 7.0498C16.7313 7.83117 17.1701 8.89079 17.1701 9.99564C17.1701 11.1005 16.7313 12.1601 15.9502 12.9415"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export { PlayButton, PauseButton, SpeakerButton };
