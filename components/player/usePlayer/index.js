@@ -9,6 +9,8 @@ const usePlayer = (audio, { isPlaying }) => {
   const raf = useRef();
 
   const update = useCallback(() => {
+    if (!analyzer.current) return
+    
     analyzer.current.getByteFrequencyData(data.current);
     setAudioData(new Uint8Array(data.current));
     raf.current = requestAnimationFrame(update);
