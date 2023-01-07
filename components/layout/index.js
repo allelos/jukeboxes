@@ -44,6 +44,12 @@ const Layout = () => {
     setIsPlaying(false);
   };
 
+  const volume = (event) => {
+    if (!audio.current) return
+    const gain = event.target.value / 100
+    audio.current.volume = gain
+  }
+
   const selectSource = (value) => {
     setIsPlaying(false);
     setSource(value);
@@ -55,6 +61,7 @@ const Layout = () => {
         <Controls
           play={play}
           pause={pause}
+          volume={volume}
           isPlaying={isPlaying}
           onSelect={selectSource}
           {...sources[source]}
