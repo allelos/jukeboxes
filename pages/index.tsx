@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Rubik } from "@next/font/google";
-import logoStyles from "@styles/logo.module.css"
+import logoStyles from "@styles/logo.module.css";
 
 const rubik = Rubik({ subsets: ["latin"] });
 
@@ -16,6 +16,23 @@ const Home = () => {
         <meta name="description" content="E-Radio for Greek radio stations" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:url" content="https://jukeboxes.gr" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="jukeboxes.gr" />
+        <meta
+          property="og:description"
+          content="E-Radio for Greek radio stations"
+        />
+        <meta property="og:image" content="/public/cover.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="jukeboxes.gr" />
+        <meta property="twitter:url" content="https://jukeboxes.gr" />
+        <meta name="twitter:title" content="jukeboxes.gr" />
+        <meta
+          name="twitter:description"
+          content="E-Radio for Greek radio stations"
+        />
+        <meta name="twitter:image" content="/public/cover.png" />
       </Head>
       <Image
         src="/jukeboxes.png"
@@ -30,6 +47,6 @@ const Home = () => {
       </main>
     </>
   );
-}
+};
 
-export default Home
+export default Home;
