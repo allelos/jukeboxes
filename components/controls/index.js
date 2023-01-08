@@ -36,6 +36,7 @@ const Controls = ({
     </div>
     <div className={styles.controls}>
       <button
+        aria-label={isPlaying ? "Pause" : "Start playing"}
         className={styles.playButton}
         onClick={isPlaying ? pause : play}
         disabled={!name}
