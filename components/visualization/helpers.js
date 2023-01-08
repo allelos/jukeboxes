@@ -11,10 +11,10 @@ import {
   Vector3,
   DoubleSide,
 } from "three";
-import { createNoise2D } from "simplex-noise";
+import { createNoise3D } from "simplex-noise";
 import { max } from "../visualizations/utilities";
 
-export const renderer = new WebGLRenderer({ alpha: false, antialias: true });
+export const renderer = new WebGLRenderer({ alpha: false, antialias: false });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 const scene = new Scene();
@@ -57,7 +57,7 @@ const modulate = (val, minVal, maxVal, outMin, outMax) => {
   return outMin + fr * delta;
 };
 
-const noise2D = createNoise2D();
+const noise3d = createNoise3D();
 
 const getBall = (mesh, audioData) => {
   const halfArray = Math.floor(audioData.length / 2);
@@ -87,7 +87,7 @@ const getBall = (mesh, audioData) => {
     const radius =
       offset +
       bass +
-      noise2D(vector.x + treble, vector.y + treble, vector.z + treble);
+      noise3d(vector.x + treble, vector.y + treble, vector.z + treble);
 
     vector.multiplyScalar(radius);
 
