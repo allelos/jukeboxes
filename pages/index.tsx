@@ -23,7 +23,7 @@ const Home = () => {
           property="og:description"
           content="E-Radio for Greek radio stations"
         />
-        <meta property="og:image" content="/public/cover.png" />
+        <meta property="og:image" content="/cover.png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="jukeboxes.gr" />
         <meta property="twitter:url" content="https://jukeboxes.gr" />
@@ -32,7 +32,7 @@ const Home = () => {
           name="twitter:description"
           content="E-Radio for Greek radio stations"
         />
-        <meta name="twitter:image" content="/public/cover.png" />
+        <meta name="twitter:image" content="/cover.png" />
       </Head>
       <Image
         src="/jukeboxes.png"
