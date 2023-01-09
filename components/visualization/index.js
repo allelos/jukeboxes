@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
-import { renderer, animate, onResize } from "./helpers";
+import { renderer, animate, onResize, onVisibility } from "./helpers";
 
 const Visualization = ({ audioData }) => {
   const ref = useRef();
@@ -8,6 +8,11 @@ const Visualization = ({ audioData }) => {
     ref.current.appendChild(renderer.domElement);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
   }, []);
 
   useEffect(() => {

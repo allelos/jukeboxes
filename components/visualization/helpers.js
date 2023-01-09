@@ -102,7 +102,11 @@ const getBall = (mesh, audioData) => {
   mesh.geometry.computeVertexNormals();
 };
 
+let hideAnimation = false;
+
 export const animate = (audioData) => {
+  if (hideAnimation) return
+  
   getBall(sphere, audioData);
   sphere.rotation.x += 0.005;
   sphere.rotation.y += 0.005;
@@ -115,4 +119,8 @@ export const onResize = () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+};
+
+export const onVisibility = () => {
+  hideAnimation = document.hidden;
 };
