@@ -1,6 +1,12 @@
+
 import Image from "next/image";
-import { PlayButton, PauseButton, SpeakerButton } from "@components/controls/buttons";
+import {
+  PlayButton,
+  PauseButton,
+  SpeakerButton,
+} from "@components/controls/buttons";
 import StationSelector from "@components/selector";
+import StationRequest from "@components/stationRequest";
 import styles from "@styles/controls.module.css";
 
 const Controls = ({
@@ -15,7 +21,8 @@ const Controls = ({
 }) => (
   <div className={styles.container}>
     <div className={styles.station}>
-    <StationSelector onSelect={onSelect} />
+      <StationRequest />
+      <StationSelector onSelect={onSelect} />
       {name && (
         <div className={styles.information}>
           {imgSrc && (
