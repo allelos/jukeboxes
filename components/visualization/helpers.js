@@ -14,7 +14,7 @@ import {
 import { createNoise3D } from "simplex-noise";
 import { max } from "../visualizations/utilities";
 
-export const renderer = new WebGLRenderer({ alpha: false, antialias: false });
+export const renderer = new WebGLRenderer({ alpha: true, antialias: false });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 const scene = new Scene();
