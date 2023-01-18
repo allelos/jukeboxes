@@ -15,7 +15,7 @@
   padding: 48px 24px 24px 24px;
   border-radius: 20px;
   background-color: black;
-  border: 1px solid rgba(34, 35, 37, 0.7);
+  border: var(--border);
 }
 
 .closeButton {

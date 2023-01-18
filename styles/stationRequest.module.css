@@ -35,8 +35,8 @@
   background: black;
   border-radius: 4px;
   color: #e4e4e4;
-  border-radius: 8px;
-  border: 1px solid rgba(34, 35, 37, 0.7);
+  border-radius: var(--border-radius);
+  border: var(--border);
   font-weight: 300;
   font-size: 14px;
   cursor: pointer;
