@@ -40,19 +40,22 @@ const StationRequest = () => {
         createPortal(
           <Modal onToggle={onToggle}>
             <form className={styles.form} onSubmit={onSubmit}>
-              <input
-                autoComplete="off"
-                name="stationName"
-                type="text"
-                placeholder="Station name"
-                onChange={(e) => setName(e.target.value)}
-              />
-              <button type="submit" disabled={loading}>
-                {loading
-                  ? "Requesting a new station..."
-                  : "Make a station request"}
-              </button>
-              {error && <span>Something went wrong...</span>}
+              <label>
+                Request a new station that you would like to add to the list
+                <input
+                  autoComplete="off"
+                  name="stationName"
+                  type="text"
+                  placeholder="Station name..."
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </label>
+              <div>
+                <button type="submit" disabled={loading}>
+                  {loading ? "Submitting..." : "Submit"}
+                </button>
+              </div>
+              {error && <span>Κάτι πήγε στραβά...</span>}
             </form>
           </Modal>,
           document.body
