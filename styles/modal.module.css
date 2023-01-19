@@ -13,6 +13,7 @@
 .content {
   position: relative;
   padding: 48px 24px 24px 24px;
+  margin: 0 4px;
   border-radius: 20px;
   background-color: black;
   border: var(--border);
