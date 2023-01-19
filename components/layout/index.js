@@ -30,6 +30,11 @@ const sources = {
     src: "http://n01.radiojar.com/9ndpdg3c0s8uv?rj-ttl=5&rj-tok=AAABhclBUNQAqGi0G3H_rMgxCQ",
     imgSrc: "/stations/athensUpRadio.jpg",
     name: "Athens Up Radio"
+  },
+  flyFm: {
+    src: "http://eco.onestreaming.com:8602/;",
+    imgSrc: "/stations/flyfm.jpg",
+    name: "Fly FM 88.1"
   }
 };
 

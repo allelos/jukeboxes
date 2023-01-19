@@ -2,10 +2,11 @@ import styles from '@styles/select.module.css'
 
 const options = [
   { value: "best", name: "Best 92.6" },
-  { value: "imagine", name: "Imagine 89.7" },
   { value: "zucca", name: "Zucca Radio" },
   { value: "enLefko", name: "En Lefko 87.7" },
-  { value: "athensUpRadio", name: "Athens Up Radio"}
+  { value: "athensUpRadio", name: "Athens Up Radio"},
+  { value: "flyFm", name: "Fly FM 88.1 "},
+  { value: "imagine", name: "Imagine 89.7" },
 ];
 
 const StationSelector = ({ value, onSelect }) => {
