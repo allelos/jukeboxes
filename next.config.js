@@ -9,7 +9,7 @@ const nextConfig = {
         headers: [
           {
             key: "Referrer-Policy",
-            value: "strict-origin",
+            value: "origin",
           },
         ],
       },
