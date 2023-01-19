@@ -32,7 +32,7 @@ const sources = {
     name: "Athens Up Radio"
   },
   flyFm: {
-    src: "http://eco.onestreaming.com:8602/;",
+    src: "http://eco.onestreaming.com:8602/stream?type=http&nocache=123935",
     imgSrc: "/stations/flyfm.jpg",
     name: "Fly FM 88.1"
   }
