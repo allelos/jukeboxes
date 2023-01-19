@@ -13,13 +13,13 @@ const sources = {
   enLefko: {
     src: "https://stream.radiojar.com/srzwv225e3quv?_=801191",
     imgSrc: "/stations/enLefko.png",
-    name: "En Lefko 87.7"
+    name: "En Lefko 87.7",
   },
   imagine: {
     src: "//imagine897.radioca.st/stream",
     imgSrc: "/stations/imagine897.png",
     name: "Imagine 89.7",
-    genre: "Eclectic"
+    genre: "Eclectic",
   },
   zucca: {
     src: "https://stream.zuccaradio.com/stream",
@@ -29,40 +29,47 @@ const sources = {
   athensUpRadio: {
     src: "http://n01.radiojar.com/9ndpdg3c0s8uv?rj-ttl=5&rj-tok=AAABhclBUNQAqGi0G3H_rMgxCQ",
     imgSrc: "/stations/athensUpRadio.jpg",
-    name: "Athens Up Radio"
+    name: "Athens Up Radio",
   },
   flyFm: {
     src: "http://eco.onestreaming.com:8602/stream?type=http&nocache=123935",
     imgSrc: "/stations/flyfm.jpg",
-    name: "Fly FM 88.1"
-  }
+    name: "Fly FM 88.1",
+  },
 };
 
 const Layout = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [error, setError] = useState(false);
   const [source, setSource] = useState("");
 
   const audio = useRef();
 
   const play = () => {
-    audio.current.play();
-    setIsPlaying(true);
+    audio.current
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch(() => {
+        setError(true);
+      });
   };
 
   const pause = () => {
     audio.current.pause();
-    setIsPlaying(false);
   };
 
   const volume = (event) => {
-    if (!audio.current) return
-    const gain = event.target.value / 100
-    audio.current.volume = gain
-  }
+    if (!audio.current) return;
+    const gain = event.target.value / 100;
+    audio.current.volume = gain;
+  };
 
   const selectSource = (value) => {
     setIsPlaying(false);
     setSource(value);
+    setError(false)
   };
 
   return (
@@ -74,6 +81,7 @@ const Layout = () => {
           volume={volume}
           isPlaying={isPlaying}
           onSelect={selectSource}
+          error={error}
           {...sources[source]}
         />
       </div>

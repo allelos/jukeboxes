@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import {
   PlayButton,
@@ -18,6 +17,7 @@ const Controls = ({
   imgSrc,
   genre = "Electronic",
   onSelect,
+  error,
 }) => (
   <div className={styles.container}>
     <div className={styles.station}>
@@ -31,12 +31,13 @@ const Controls = ({
               alt="Radio station logo"
               width={80}
               height={80}
-              className={styles.image}
+              className={`${styles.image} ${error && styles.error}`}
             />
           )}
           <div className={styles.header}>
             <h2>{name}</h2>
             <h4>{genre}</h4>
+            {error && <h4>Offline</h4>}
           </div>
         </div>
       )}
