@@ -1,0 +1,28 @@
+.label {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  line-height: 1.4;
+  font-weight: 400;
+  width: 100%;
+}
+
+.input {
+  outline: 0;
+  padding: 16px 8px;
+  background: black;
+  border-radius: 4px;
+  color: #e4e4e4;
+  border-radius: var(--border-radius);
+  border: var(--border);
+  font-weight: 300;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.2s ease-in-out;
+  transition-property: border-color;
+}
+
+.input:active, .input:focus {
+  border-color:rgba(68,2,46,1);
+}

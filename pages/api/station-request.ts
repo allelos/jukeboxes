@@ -13,14 +13,14 @@ const stationRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const sheets = google.sheets({ version: "v4", auth });
 
-    const { name } = req.body;
+    const { name, genre, streamingUrl } = req.body;
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.SHEET_ID,
-      range: "A2:B2",
+      range: "A2:D2",
       valueInputOption: "USER_ENTERED",
       requestBody: {
-        values: [[name, new Date().toLocaleDateString()]],
+        values: [[name, genre, streamingUrl, new Date().toLocaleDateString()]],
       },
     });
 
