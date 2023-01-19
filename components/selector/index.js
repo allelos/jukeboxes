@@ -5,6 +5,7 @@ const options = [
   { value: "imagine", name: "Imagine 89.7" },
   { value: "zucca", name: "Zucca Radio" },
   { value: "enLefko", name: "En Lefko 87.7" },
+  { value: "athensUpRadio", name: "Athens Up Radio"}
 ];
 
 const StationSelector = ({ value, onSelect }) => {

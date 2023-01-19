@@ -26,6 +26,11 @@ const sources = {
     imgSrc: "/stations/zuccaRadio.jpg",
     name: "Zucca Radio",
   },
+  athensUpRadio: {
+    src: "http://n01.radiojar.com/9ndpdg3c0s8uv?rj-ttl=5&rj-tok=AAABhclBUNQAqGi0G3H_rMgxCQ",
+    imgSrc: "/stations/athensUpRadio.jpg",
+    name: "Athens Up Radio"
+  }
 };
 
 const Layout = () => {
