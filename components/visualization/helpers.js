@@ -4,12 +4,14 @@ import {
   Scene,
   Mesh,
   IcosahedronGeometry,
-  PlaneGeometry,
+  // PlaneGeometry,
   MeshLambertMaterial,
-  AmbientLight,
+  // AmbientLight,
   PointLight,
   Vector3,
-  DoubleSide,
+  // DoubleSide,
+  HemisphereLight,
+  DirectionalLight,
 } from "three";
 import { createNoise3D } from "simplex-noise";
 import { max } from "../visualizations/utilities";
@@ -31,25 +33,29 @@ const material = new MeshLambertMaterial({
   wireframe: true,
 });
 
-const planeGeometry = new PlaneGeometry(800, 800, 20, 20);
-const planeMaterial = new MeshLambertMaterial({
-  color: 0xffffff,
-  side: DoubleSide,
-  // wireframe: true,
-});
+// const planeGeometry = new PlaneGeometry(800, 800, 20, 20);
+// const planeMaterial = new MeshLambertMaterial({
+//   color: 0xffffff,
+//   side: DoubleSide,
+//   // wireframe: true,
+// });
 
 const sphere = new Mesh(geometry, material);
 
-const plane = new Mesh(planeGeometry, planeMaterial);
-plane.rotation.x = -0.5 * Math.PI;
-plane.position.set(0, -30, 0);
+// const plane = new Mesh(planeGeometry, planeMaterial);
+// plane.rotation.x = -0.5 * Math.PI;
+// plane.position.set(0, -30, 0);
 
-const ambientLight = new AmbientLight(0xcccccc);
 const pointLight = new PointLight(0xffffff);
+const light = new HemisphereLight(0xd90368, 0x64a6bd, 2);
+const frontLight = new DirectionalLight(0xffffff, 1);
+
+frontLight.position.set(1000, 100, 1000).normalize();
 
 scene.add(sphere);
-scene.add(ambientLight);
+scene.add(light);
 scene.add(pointLight);
+scene.add(frontLight)
 
 const modulate = (val, minVal, maxVal, outMin, outMax) => {
   const fr = (val - minVal) / (maxVal - minVal);
@@ -73,7 +79,7 @@ const getBall = (mesh, audioData) => {
   const offset = mesh.geometry.parameters.radius;
   const positions = mesh.geometry.attributes.position.array;
 
-  pointLight.color.setRGB(192, upperMax / 255, 186);
+  // pointLight.color.setRGB(192, upperMax / 255, 186);
 
   for (let i = 0; i < positions.length; i += 3) {
     const vector = new Vector3(
@@ -105,13 +111,13 @@ const getBall = (mesh, audioData) => {
 let hideAnimation = false;
 
 export const animate = (audioData) => {
-  if (hideAnimation) return
-  
+  if (hideAnimation) return;
+
   getBall(sphere, audioData);
   sphere.rotation.x += 0.005;
   sphere.rotation.y += 0.005;
   sphere.rotation.z += 0.005;
-  plane.rotation.z += 0.001;
+
   renderer.render(scene, camera);
 };
 
