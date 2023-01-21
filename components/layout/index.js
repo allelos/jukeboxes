@@ -3,42 +3,11 @@ import Controls from "@components/controls";
 import Player from "@components/player";
 import Visualization from "@components/visualization";
 import styles from "@styles/interface.module.css";
+import StationSelector from "@components/selector";
+import StationRequest from "@components/stationRequest";
+import StationInformation from "@components/stationInformation";
 
-const sources = {
-  best: {
-    src: "//best.live24.gr/best1222",
-    imgSrc: "/stations/best926.jpg",
-    name: "Best 92.6",
-  },
-  enLefko: {
-    src: "https://stream.radiojar.com/srzwv225e3quv?_=801191",
-    imgSrc: "/stations/enLefko.png",
-    name: "En Lefko 87.7",
-  },
-  imagine: {
-    src: "//imagine897.radioca.st/stream",
-    imgSrc: "/stations/imagine897.png",
-    name: "Imagine 89.7",
-    genre: "Eclectic",
-  },
-  zucca: {
-    src: "https://stream.zuccaradio.com/stream",
-    imgSrc: "/stations/zuccaRadio.jpg",
-    name: "Zucca Radio",
-  },
-  athensUpRadio: {
-    src: "http://n01.radiojar.com/9ndpdg3c0s8uv?rj-ttl=5&rj-tok=AAABhclBUNQAqGi0G3H_rMgxCQ",
-    imgSrc: "/stations/athensUpRadio.jpg",
-    name: "Athens Up Radio",
-  },
-  flyFm: {
-    src: "http://eco.onestreaming.com:8602/stream?type=http&nocache=123935",
-    imgSrc: "/stations/flyfm.jpg",
-    name: "Fly FM 88.1",
-  },
-};
-
-const Layout = () => {
+const Layout = ({ sources, sourcesById }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState(false);
   const [source, setSource] = useState("");
@@ -74,24 +43,25 @@ const Layout = () => {
   };
 
   return (
-    <div>
+    <>
       <div className={styles.container}>
         <Controls
           play={play}
           pause={pause}
           volume={volume}
           isPlaying={isPlaying}
-          onSelect={selectSource}
-          error={error}
-          {...sources[source]}
-        />
+          source={source}
+        >
+          <StationRequest />
+          <StationSelector onSelect={selectSource} sources={sources} />
+          <StationInformation {...sourcesById[source]} error={error} />
+        </Controls>
       </div>
       {source && (
         <audio
           ref={audio}
-          src={sources[source]?.src}
+          src={sourcesById[source]?.streamingUrl}
           crossOrigin="anonymous"
-          // muted
         />
       )}
       {source && (
@@ -99,7 +69,7 @@ const Layout = () => {
           {(audioData) => isPlaying && <Visualization audioData={audioData} />}
         </Player>
       )}
-    </div>
+    </>
   );
 };
 

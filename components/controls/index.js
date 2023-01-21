@@ -4,50 +4,17 @@ import {
   PauseButton,
   SpeakerButton,
 } from "@components/controls/buttons";
-import StationSelector from "@components/selector";
-import StationRequest from "@components/stationRequest";
 import styles from "@styles/controls.module.css";
 
-const Controls = ({
-  play,
-  pause,
-  volume,
-  isPlaying,
-  name,
-  imgSrc,
-  genre = "Electronic",
-  onSelect,
-  error,
-}) => (
+const Controls = ({ play, pause, volume, isPlaying, source, children }) => (
   <div className={styles.container}>
-    <div className={styles.station}>
-      <StationRequest />
-      <StationSelector onSelect={onSelect} />
-      {name && (
-        <div className={styles.information}>
-          {imgSrc && (
-            <Image
-              src={imgSrc}
-              alt="Radio station logo"
-              width={80}
-              height={80}
-              className={`${styles.image} ${error && styles.error}`}
-            />
-          )}
-          <div className={styles.header}>
-            <h2>{name}</h2>
-            <h4>{genre}</h4>
-            {error && <h4>Offline</h4>}
-          </div>
-        </div>
-      )}
-    </div>
+    <div className={styles.station}>{children}</div>
     <div className={styles.controls}>
       <button
         aria-label={isPlaying ? "Pause" : "Start playing"}
         className={styles.playButton}
         onClick={isPlaying ? pause : play}
-        disabled={!name}
+        disabled={!source}
       >
         {isPlaying ? <PauseButton /> : <PlayButton />}
       </button>
