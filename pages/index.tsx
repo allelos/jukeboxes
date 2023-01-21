@@ -1,14 +1,16 @@
+import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Rubik } from "@next/font/google";
 import logoStyles from "@styles/logo.module.css";
+import prisma from "@lib/prisma";
 
 const rubik = Rubik({ subsets: ["latin"] });
 
 const Player = dynamic(() => import("@components/layout"), { ssr: false });
 
-const Home = () => {
+const Home = ({ sources = [], sourcesById = {} }) => {
   return (
     <>
       <Head>
@@ -43,10 +45,48 @@ const Home = () => {
         className={logoStyles.container}
       />
       <main className={rubik.className}>
-        <Player />
+        <Player sources={sources} sourcesById={sourcesById} />
       </main>
     </>
   );
 };
 
 export default Home;
+
+type SourceById = {
+  [key: number]: {
+    id: number;
+    imageSrc: string;
+    streamingUrl: string;
+    genre: string | null;
+    name: string;
+  };
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  try {
+    const sources = await prisma.station.findMany({
+      select: {
+        id: true,
+        name: true,
+        streamingUrl: true,
+        imageSrc: true,
+        genre: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+    });
+
+    const sourcesById = sources.reduce((acc: SourceById, source) => {
+      acc[source.id] = { ...source, genre: source.genre.name };
+      return acc;
+    }, {});
+
+    return { props: { sources, sourcesById }, revalidate: 60 };
+  } catch (e) {
+    return { props: { sources: [], sourcesById: {} }, revalidate: 60 };
+  }
+};
