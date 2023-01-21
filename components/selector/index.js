@@ -1,24 +1,25 @@
-import styles from '@styles/select.module.css'
+import styles from "@styles/select.module.css";
+import { useMemo } from "react";
 
-const options = [
-  { value: "best", name: "Best 92.6" },
-  { value: "zucca", name: "Zucca Radio" },
-  { value: "enLefko", name: "En Lefko 87.7" },
-  { value: "athensUpRadio", name: "Athens Up Radio"},
-  { value: "flyFm", name: "Fly FM 88.1 "},
-  { value: "imagine", name: "Imagine 89.7" },
-];
+const StationSelector = ({ value, onSelect, sources }) => {
+  const options = useMemo(
+    () => sources.map(({ id, name }) => ({ value: id, name })),
+    [sources]
+  );
 
-const StationSelector = ({ value, onSelect }) => {
   return (
     <select
       className={styles.select}
       value={value}
       onChange={(e) => onSelect(e.target.value)}
     >
-      <option value="0" defaultValue="selected">Select radio station...</option>
+      <option value="0" defaultValue="selected">
+        Select radio station...
+      </option>
       {options.map(({ value, name }) => (
-        <option value={value} key={value}>{name}</option>
+        <option value={value} key={value}>
+          {name}
+        </option>
       ))}
     </select>
   );
