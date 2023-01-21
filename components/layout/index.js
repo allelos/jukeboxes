@@ -58,6 +58,7 @@ const Layout = () => {
 
   const pause = () => {
     audio.current.pause();
+    setIsPlaying(false);
   };
 
   const volume = (event) => {
@@ -69,7 +70,7 @@ const Layout = () => {
   const selectSource = (value) => {
     setIsPlaying(false);
     setSource(value);
-    setError(false)
+    setError(false);
   };
 
   return (
