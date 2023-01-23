@@ -1,5 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { google } from "googleapis";
+import sendgrid from "@sendgrid/mail";
+
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY || "");
 
 const stationRequest = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -23,6 +26,19 @@ const stationRequest = async (req: NextApiRequest, res: NextApiResponse) => {
         values: [[name, genre, streamingUrl, new Date().toLocaleDateString()]],
       },
     });
+
+    const msg = {
+      to: process.env.SENDGRID_EMAIL_RECIPIENT || "",
+      from: process.env.SENDGRID_EMAIL_RECIPIENT || "",
+      subject: `You have a new request to add ${name} radio station`,
+      text: `A new station request to add ${name} has been created. Please review :)`,
+      html: `<ul>${[name, genre, streamingUrl]
+        .filter(Boolean)
+        .map((value) => `<li>${value}</li>`)
+        .join("")}</ul>`,
+    };
+
+    sendgrid.send(msg);
 
     res.status(201).json({ data: "success" });
   } catch (e) {
