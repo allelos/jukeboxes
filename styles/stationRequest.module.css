@@ -56,6 +56,19 @@
   gap: 16px;
 }
 
+.success {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 768px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 @media only screen and (max-width: 480px) {
   .form .row {
     flex-direction: column;
