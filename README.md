@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.jukeboxes.gr">
-    <img alt="Amberele" src="public/jukeboxes.png" />
+    <img alt="Jukeboxes" src="public/jukeboxes.png" />
   </a>
 </p>
 

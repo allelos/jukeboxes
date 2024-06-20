@@ -29,7 +29,7 @@ const stationRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const msg = {
       to: process.env.SENDGRID_EMAIL_RECIPIENT || "",
-      from: process.env.SENDGRID_EMAIL_RECIPIENT || "",
+      from: "pem5775.jukeboxes.gr",
       subject: `You have a new request to add ${name} radio station`,
       text: `A new station request to add ${name} has been created. Please review :)`,
       html: `<ul>${[name, genre, streamingUrl]

@@ -4,7 +4,9 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Rubik } from "@next/font/google";
 import logoStyles from "@styles/logo.module.css";
-import prisma from "@lib/prisma";
+import { eq } from "drizzle-orm";
+import { genre, station } from "@db/schema";
+import { db } from "@lib/drizzle";
 
 const rubik = Rubik({ subsets: ["latin"] });
 
@@ -53,37 +55,24 @@ const Home = ({ sources = [], sourcesById = {} }) => {
 
 export default Home;
 
-type SourceById = {
-  [key: number]: {
-    id: number;
-    imageSrc: string;
-    streamingUrl: string;
-    genre: string | null;
-    name: string;
-  };
-};
-
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const sources = await prisma.station.findMany({
-      select: {
-        id: true,
-        name: true,
-        streamingUrl: true,
-        imageSrc: true,
-        genre: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
-      },
-    });
+    const stations = await db
+      .select()
+      .from(station)
+      .leftJoin(genre, eq(genre.id, station.genreId));
 
-    const sourcesById = sources.reduce((acc: SourceById, source) => {
-      acc[source.id] = { ...source, genre: source.genre.name };
-      return acc;
+    const sourcesById = stations.reduce((acc, { station, genre }) => {
+      return {
+        ...acc,
+        [station.id]: { ...station, genre: genre?.name },
+      };
     }, {});
+
+    const sources = stations.map(({ station }) => ({
+      id: station.id,
+      name: station.name,
+    }));
 
     return { props: { sources, sourcesById }, revalidate: 60 };
   } catch (e) {
