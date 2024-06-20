@@ -4,14 +4,9 @@ import {
   Scene,
   Mesh,
   IcosahedronGeometry,
-  // PlaneGeometry,
   MeshLambertMaterial,
-  // AmbientLight,
   PointLight,
   Vector3,
-  // DoubleSide,
-  HemisphereLight,
-  DirectionalLight,
 } from "three";
 import { createNoise3D } from "simplex-noise";
 import { max } from "../visualizations/utilities";
@@ -29,7 +24,7 @@ camera.position.set(0, 0, 50);
 
 const geometry = new IcosahedronGeometry(10, 18);
 const material = new MeshLambertMaterial({
-  color: 0xf6019d,
+  color: 0xffffff,
   wireframe: true,
 });
 
@@ -46,16 +41,24 @@ const sphere = new Mesh(geometry, material);
 // plane.rotation.x = -0.5 * Math.PI;
 // plane.position.set(0, -30, 0);
 
-const pointLight = new PointLight(0xffffff);
-const light = new HemisphereLight(0xd90368, 0x64a6bd, 2);
-const frontLight = new DirectionalLight(0xffffff, 1);
+const topLight = new PointLight(0xffffff, 1, 500);
+const bottomLight = new PointLight(0xffffff, 1, 250);
+const frontLight = new PointLight(0xffffff, 0.5);
+const rightLight = new PointLight(0xffffff, 1.25, 250);
+const leftLight = new PointLight(0xffffff, 0.5, 250);
 
-frontLight.position.set(1000, 100, 1000).normalize();
+topLight.position.set(0, 20, 17);
+frontLight.position.set(0, 0, 15);
+bottomLight.position.set(0, -20, 17)
+rightLight.position.set(25, -20, 10)
+leftLight.position.set(-25, 20, 10)
 
 scene.add(sphere);
-scene.add(light);
-scene.add(pointLight);
+scene.add(topLight);
 scene.add(frontLight)
+scene.add(bottomLight);
+scene.add(rightLight);
+scene.add(leftLight);
 
 const modulate = (val, minVal, maxVal, outMin, outMax) => {
   const fr = (val - minVal) / (maxVal - minVal);
@@ -78,8 +81,6 @@ const getBall = (mesh, audioData) => {
 
   const offset = mesh.geometry.parameters.radius;
   const positions = mesh.geometry.attributes.position.array;
-
-  // pointLight.color.setRGB(192, upperMax / 255, 186);
 
   for (let i = 0; i < positions.length; i += 3) {
     const vector = new Vector3(
