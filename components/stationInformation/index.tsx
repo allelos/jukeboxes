@@ -1,16 +1,15 @@
-import type { FC, ReactNode } from "react";
-import Image from "next/image";
-import styles from "@styles/controls.module.css";
+import Image from "next/image"
+import styles from "@styles/controls.module.css"
 
-type Props = {
-  name: string;
-  imageSrc?: string;
-  error: boolean;
-  genre: string;
-};
+type StationInformationProp = {
+  name: string
+  imageSrc?: string
+  error: boolean
+  genre: string
+}
 
-const StationInformation: FC<Props> = ({ name, imageSrc, error, genre }) => {
-  if (!name) return null;
+function StationInformation({ name, imageSrc, error, genre }: StationInformationProp) {
+  if (!name) return null
 
   return (
     <div className={styles.information}>
@@ -29,7 +28,7 @@ const StationInformation: FC<Props> = ({ name, imageSrc, error, genre }) => {
         {error && <h4>Offline</h4>}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default StationInformation;
+export default StationInformation

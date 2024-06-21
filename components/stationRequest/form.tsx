@@ -1,65 +1,49 @@
-import type { FC, ChangeEvent } from "react";
-import axios from "axios";
-import { useState } from "react";
-import Input from "@components/input";
-import styles from "@styles/stationRequest.module.css";
+import type { ChangeEvent } from "react"
+import axios from "axios"
+import { useState } from "react"
+import Input from "@components/input"
+import styles from "@styles/stationRequest.module.css"
 
-type Props = {
-  onSuccess: (value: string) => void;
-};
+type FormProps = {
+  onSuccess: (value: string) => void
+}
 
-const makeOnChange =
-  (fn: (value: string) => void) => (e: ChangeEvent<HTMLInputElement>) =>
-    fn(e.target.value);
+const makeOnChange = (fn: (value: string) => void) => (e: ChangeEvent<HTMLInputElement>) => fn(e.target.value)
 
-const Form: FC<Props> = ({ onSuccess }) => {
-  const [name, setName] = useState("");
-  const [genre, setGenre] = useState("");
-  const [streamingUrl, setStreamingUrl] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+function Form({ onSuccess }: FormProps) {
+  const [name, setName] = useState("")
+  const [genre, setGenre] = useState("")
+  const [streamingUrl, setStreamingUrl] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const onSubmit: React.ChangeEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    if (!name) return;
-    if (loading) return;
+    if (!name) return
+    if (loading) return
 
-    setLoading(true);
+    setLoading(true)
     axios
       .post("/api/station-request", { name, genre, streamingUrl })
       .then(() => {
-        setError(null);
-        if (onSuccess) onSuccess("completion");
+        setError(null)
+        if (onSuccess) onSuccess("completion")
       })
       .catch(setError)
-      .finally(() => setLoading(false));
-  };
+      .finally(() => setLoading(false))
+  }
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <h2>Request a new station that you would like to add to the list</h2>
-      <Input
-        name="stationName"
-        type="text"
-        placeholder="Station name..."
-        onChange={makeOnChange(setName)}
-        required
-      >
+      <Input name="stationName" type="text" placeholder="Station name..." onChange={makeOnChange(setName)} required>
         Station name
       </Input>
       <div className={styles.row}>
-        <Input
-          name="stationGenre"
-          placeholder="Electronic"
-          onChange={makeOnChange(setGenre)}
-        >
+        <Input name="stationGenre" placeholder="Electronic" onChange={makeOnChange(setGenre)}>
           Genre / Category
         </Input>
-        <Input
-          name="stationUrl"
-          placeholder="https://..."
-          onChange={makeOnChange(setStreamingUrl)}
-        >
+        <Input name="stationUrl" placeholder="https://..." onChange={makeOnChange(setStreamingUrl)}>
           Streaming URL
         </Input>
       </div>
@@ -71,7 +55,7 @@ const Form: FC<Props> = ({ onSuccess }) => {
       </div>
       {error && <span>Κάτι πήγε στραβά...</span>}
     </form>
-  );
-};
+  )
+}
 
-export default Form;
+export default Form

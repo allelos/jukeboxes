@@ -1,23 +1,16 @@
-import type { ChangeEvent, FC, ReactNode } from "react";
-import styles from "@styles/inputs.module.css";
+import type { ChangeEvent, FC, ReactNode } from "react"
+import styles from "@styles/inputs.module.css"
 
-type Props = {
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  name: string;
-  children?: ReactNode | string;
-  type?: string;
-  placeholder?: string;
-  required?: boolean;
-};
+type InputProps = {
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  name: string
+  children?: ReactNode | string
+  type?: string
+  placeholder?: string
+  required?: boolean
+}
 
-const Input: FC<Props> = ({
-  onChange,
-  children,
-  name,
-  placeholder,
-  type = "text",
-  required,
-}) => {
+function Input({ onChange, children, name, placeholder, type = "text", required }: InputProps) {
   return (
     <label className={styles.label}>
       {children}
@@ -31,7 +24,7 @@ const Input: FC<Props> = ({
         onChange={onChange}
       />
     </label>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input
